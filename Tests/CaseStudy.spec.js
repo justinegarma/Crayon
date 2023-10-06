@@ -2,9 +2,12 @@ const { test, expect } = require('@playwright/test');
 import { PersonalInfo } from '../pages/PersonalInfo'
 import { EventInfo } from '../pages/EventInfo'
 
-test('Submit Personal Information form with valid required fields', async ({ page, context }) => {
+test.beforeEach(async ({page, context}) => {
     await page.goto('https://docs.google.com/forms/d/e/1FAIpQLSe8uL-dd5Z4Pzh1_yo9nB5vPoU2yaNZiulrTAbic8ZZbU-YqA/viewform?hl=en&vc=0&c=0&w=1&flr=0');
     await page.getByRole('button', { name: 'Next' }).click();
+});
+
+test('Submit Personal Information form with valid required fields', async ({ page, context }) => {
     const Personal = new PersonalInfo(page);
     await Personal.enterPersonalInfo({
         fullName: 'Justine Garma',
@@ -16,8 +19,6 @@ test('Submit Personal Information form with valid required fields', async ({ pag
 });
 
 test('Submit Personal Information form without name', async ({ page, context }) => {
-    await page.goto('https://docs.google.com/forms/d/e/1FAIpQLSe8uL-dd5Z4Pzh1_yo9nB5vPoU2yaNZiulrTAbic8ZZbU-YqA/viewform?hl=en&vc=0&c=0&w=1&flr=0');
-    await page.getByRole('button', { name: 'Next' }).click();
     const Personal = new PersonalInfo(page);
     await Personal.enterPersonalInfo({
         gender: 'Male',
@@ -29,8 +30,6 @@ test('Submit Personal Information form without name', async ({ page, context }) 
 });
 
 test('Submit Personal Information form without date of birth', async ({ page, context }) => {
-    await page.goto('https://docs.google.com/forms/d/e/1FAIpQLSe8uL-dd5Z4Pzh1_yo9nB5vPoU2yaNZiulrTAbic8ZZbU-YqA/viewform?hl=en&vc=0&c=0&w=1&flr=0');
-    await page.getByRole('button', { name: 'Next' }).click();
     const Personal = new PersonalInfo(page);
     await Personal.enterPersonalInfo({
         fullName: 'Justine Garma',
@@ -42,8 +41,6 @@ test('Submit Personal Information form without date of birth', async ({ page, co
 });
 
 test('Submit Personal Information form without email', async ({ page, context }) => {
-    await page.goto('https://docs.google.com/forms/d/e/1FAIpQLSe8uL-dd5Z4Pzh1_yo9nB5vPoU2yaNZiulrTAbic8ZZbU-YqA/viewform?hl=en&vc=0&c=0&w=1&flr=0');
-    await page.getByRole('button', { name: 'Next' }).click();
     const Personal = new PersonalInfo(page);
     await Personal.enterPersonalInfo({
         fullName: 'Justine Garma',
@@ -56,8 +53,6 @@ test('Submit Personal Information form without email', async ({ page, context })
 });
 
 test('Submit Personal Information form with invalid email value', async ({ page, context }) => {
-    await page.goto('https://docs.google.com/forms/d/e/1FAIpQLSe8uL-dd5Z4Pzh1_yo9nB5vPoU2yaNZiulrTAbic8ZZbU-YqA/viewform?hl=en&vc=0&c=0&w=1&flr=0');
-    await page.getByRole('button', { name: 'Next' }).click();
     const Personal = new PersonalInfo(page);
     await Personal.enterPersonalInfo({
         fullName: 'Justine Garma',
@@ -70,8 +65,6 @@ test('Submit Personal Information form with invalid email value', async ({ page,
 });
 
 test('Submit complete Event Information form with valid required fields', async ({ page, context }) => {
-    await page.goto('https://docs.google.com/forms/d/e/1FAIpQLSe8uL-dd5Z4Pzh1_yo9nB5vPoU2yaNZiulrTAbic8ZZbU-YqA/viewform?hl=en&vc=0&c=0&w=1&flr=0');
-    await page.getByRole('button', { name: 'Next' }).click();
     const Personal = new PersonalInfo(page);
     await Personal.enterPersonalInfo({
         fullName: 'Justine Garma',
@@ -99,8 +92,6 @@ test('Submit complete Event Information form with valid required fields', async 
 });
 
 test('Submit Event Information form without days attending field', async ({ page, context }) => {
-    await page.goto('https://docs.google.com/forms/d/e/1FAIpQLSe8uL-dd5Z4Pzh1_yo9nB5vPoU2yaNZiulrTAbic8ZZbU-YqA/viewform?hl=en&vc=0&c=0&w=1&flr=0');
-    await page.getByRole('button', { name: 'Next' }).click();
     const Personal = new PersonalInfo(page);
     await Personal.enterPersonalInfo({
         fullName: 'Justine Garma',
@@ -128,8 +119,6 @@ test('Submit Event Information form without days attending field', async ({ page
 });
 
 test('Submit Event Information form  without Available from time', async ({ page, context }) => {
-    await page.goto('https://docs.google.com/forms/d/e/1FAIpQLSe8uL-dd5Z4Pzh1_yo9nB5vPoU2yaNZiulrTAbic8ZZbU-YqA/viewform?hl=en&vc=0&c=0&w=1&flr=0');
-    await page.getByRole('button', { name: 'Next' }).click();
     const Personal = new PersonalInfo(page);
     await Personal.enterPersonalInfo({
         fullName: 'Justine Garma',
@@ -183,8 +172,6 @@ test('Submit Event Information form with blank hour value for Available from', a
 });
 
 test('Submit Event Information form with blank minute value for Available from', async ({ page, context }) => {
-    await page.goto('https://docs.google.com/forms/d/e/1FAIpQLSe8uL-dd5Z4Pzh1_yo9nB5vPoU2yaNZiulrTAbic8ZZbU-YqA/viewform?hl=en&vc=0&c=0&w=1&flr=0');
-    await page.getByRole('button', { name: 'Next' }).click();
     const Personal = new PersonalInfo(page);
     await Personal.enterPersonalInfo({
         fullName: 'Justine Garma',
@@ -213,8 +200,6 @@ test('Submit Event Information form with blank minute value for Available from',
 });
 
 test('Submit Event Information form with invalid time value', async ({ page, context }) => {
-    await page.goto('https://docs.google.com/forms/d/e/1FAIpQLSe8uL-dd5Z4Pzh1_yo9nB5vPoU2yaNZiulrTAbic8ZZbU-YqA/viewform?hl=en&vc=0&c=0&w=1&flr=0');
-    await page.getByRole('button', { name: 'Next' }).click();
     const Personal = new PersonalInfo(page);
     await Personal.enterPersonalInfo({
         fullName: 'Justine Garma',
@@ -243,8 +228,6 @@ test('Submit Event Information form with invalid time value', async ({ page, con
 });
 
 test('Blank dietary restriction', async ({ page, context }) => {
-    await page.goto('https://docs.google.com/forms/d/e/1FAIpQLSe8uL-dd5Z4Pzh1_yo9nB5vPoU2yaNZiulrTAbic8ZZbU-YqA/viewform?hl=en&vc=0&c=0&w=1&flr=0');
-    await page.getByRole('button', { name: 'Next' }).click();
     const Personal = new PersonalInfo(page);
     await Personal.enterPersonalInfo({
         fullName: 'Justine Garma',
@@ -272,8 +255,6 @@ test('Blank dietary restriction', async ({ page, context }) => {
 });
 
 test('Submit Event Application form without ticking arrival fee confirmation', async ({ page, context }) => {
-    await page.goto('https://docs.google.com/forms/d/e/1FAIpQLSe8uL-dd5Z4Pzh1_yo9nB5vPoU2yaNZiulrTAbic8ZZbU-YqA/viewform?hl=en&vc=0&c=0&w=1&flr=0');
-    await page.getByRole('button', { name: 'Next' }).click();
     const Personal = new PersonalInfo(page);
     await Personal.enterPersonalInfo({
         fullName: 'Justine Garma',
