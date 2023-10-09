@@ -59,3 +59,5 @@ test('Test 2', async ({ page, context }) => {
     });
 });
 ```
+
+Run test
